@@ -1,34 +1,24 @@
-<!DOCTYPE html>
-<html lang="ja">
+
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
-  <title>SkyWayチュートリアル</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://skyway.io/dist/v2/0.3/peer.js"></script>
+    <script type="text/javascript" src="script.js"></script>
 </head>
 <body>
-  <video id="my-video" width="400px" autoplay muted playsinline></video>
-   <p id="my-id"></p>
-    <textarea id="their-id"></textarea>
-  <button id="make-call">発信</button>
-  <video id="their-video" width="400px" autoplay muted playsinline></video>
+    <h1>Simple Video Chat</h1>
+    <div>
+        <video id="my-video" style="width: 300px;" autoplay></video>
+        <video id="peer-video" style="width: 300px;" autoplay></video>
+    </div>
+    <div>
+        <p>MyID: <span id="my-id">-</span></p>
+        <p>PeerID: <span id="peer-id">-</span></p>
+    </div>
+    <div>
+        <input type="text" placeholder="PeerID" id="peer-id-input">
+        <button id="call-start">Start Call</button>
+        <button id="call-end">End Call</button>
+    </div>
 </body>
-<script>
-  let localStream;
-
-  // カメラ映像取得
-  navigator.mediaDevices.getUserMedia({video: true, audio: true})
-    .then( stream => {
-    // 成功時にvideo要素にカメラ映像をセットし、再生
-    const videoElm = document.getElementById('my-video')
-    videoElm.srcObject = stream;
-    videoElm.play();
-    // 着信時に相手にカメラ映像を返せるように、グローバル変数に保存しておく
-    localStream = stream;
-  }).catch( error => {
-    // 失敗時にはエラーログを出力
-    console.error('mediaDevice.getUserMedia() error:', error);
-    return;
-  });
-</script>
 </html>
